@@ -1,7 +1,6 @@
-module.exports = `  # Dependency directories
-node_modules/
-# Optional npm cache directory
+module.exports = `node_modules/
+package-lock.json
 .npm
-# Optional eslint cache
 .eslintcache
+.DS_Store
 `;

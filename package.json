@@ -1,12 +1,13 @@
 {
   "name": "nodeitup",
   "version": "0.0.1",
-  "description": "Create a new JavaScript project with Chai, Mocha, Husky and ESLint.",
+  "description": "Create a new JavaScript project with Husky and ESLint and your choice of Mocha/Chai or Jest.",
   "keywords": [
     "javascript",
     "node",
     "chai",
     "mocha",
+    "jest",
     "husky",
     "eslint",
     "test",
@@ -21,8 +22,7 @@
     "nodeitup": "create.js"
   },
   "scripts": {
-    "start": "node create",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node create"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/dentednerd/nodeitup#readme",
   "dependencies": {
-    "colors": "^1.4.0"
+    "colors": "^1.4.0",
+    "inquirer": "^8.2.0"
   }
 }
