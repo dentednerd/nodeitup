@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-// TODO: create Github repo and push up, using gh cli
-
 const { execSync } = require('child_process');
 const colors = require('colors');
 const inquirer = require('inquirer');
