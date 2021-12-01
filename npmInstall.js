@@ -60,7 +60,7 @@ const npmInstall = async (path, testingPackage) => {
   await writeFile(
     `${path}/package.json`,
     JSON.stringify(packageContent, null, 2),
-    {stdio: 'ignore'}
+    { stdio: 'ignore' }
   );
 
   console.log(colors.green(`package.json updated.`));

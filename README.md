@@ -1,12 +1,18 @@
 # NodeItUp
 
-A Node app to automatically create a new Node project with Husky for precommits and ESLint for linting.
+A [Node](https://nodejs.org/en/) app to automatically create a new Node project.
+
+## Features
+
+- initialises [Git](https://git-scm.com/) and creates an initial commit
+- uses [Husky](https://typicode.github.io/husky/#/) for pre-commit hooks
+- uses [ESLint](https://eslint.org/) for linting
 
 ## Options
 
-- testing package: either Mocha with Chai, or Jest
-- initialise the project as a Git repository, create a Github repo and immediately commit and push
-- open the project in Visual Studio Code upon completion
+- your choice of testing package: either [Mocha](https://mochajs.org/) with [Chai](https://www.chaijs.com/), or [Jest](https://jestjs.io/)
+- optionally creates a [Github](https://github.com/) repo and pushes the initial commit (requires [gh](https://github.com/cli/cli))
+- optionally opens the project in [Visual Studio Code](https://code.visualstudio.com/) upon completion (requires Visual Studio Code)
 
 ## Installation
 
