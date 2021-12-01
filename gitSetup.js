@@ -1,8 +1,11 @@
 const colors = require('colors');
-const { exec, execSync } = require('child_process');
+const { execSync } = require('child_process');
 
 const gitSetup = async (createGithubRepo, path) => {
-  if (createGithubRepo === "no") return;
+  if (createGithubRepo === "no") {
+    await execSync(`cd ${path} && git add . && git commit -m 'initial commit'`);
+    return;
+  };
 
   console.log(colors.yellow("\nCreating Github repo..."));
 
@@ -13,14 +16,13 @@ const gitSetup = async (createGithubRepo, path) => {
     else
       gh auth login --web
     fi`,
-      { stdio: 'inherit' }
+      { stdio: 'ignore' }
     );
   } catch (err) {
     if (err.status === 2) console.log(colors.red("gh is not installed."));
   }
 
   await execSync(`cd ${path}
-  git init
   gh repo create '${path}' --confirm --private
   git branch -M main
   git add .

@@ -12,18 +12,19 @@ const npmInstall = async (path, testingPackage) => {
     "extends": "standard",
     "env": {
       "browser": true,
-      "node": true
+      "node": true,
+      "es6": true,
     }
   };
 
   switch(testingPackage) {
     case 'Mocha with Chai':
-      testingNpm = " mocha chai";
+      testingNpm = "mocha chai";
       testScript = "mocha ./spec";
       eslintConfig["env"]["mocha"] = true;
       break;
     case 'Jest':
-      testingNpm = " jest eslint-plugin-jest";
+      testingNpm = "jest eslint-plugin-jest";
       testScript = "jest";
       eslintConfig["env"]["jest/globals"] = true;
       eslintConfig["plugins"] = ["jest"];
@@ -33,9 +34,12 @@ const npmInstall = async (path, testingPackage) => {
       break;
   }
 
-  await execSync(
-    `cd ${path} && npm init -y && npm install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise husky${testingNpm}`
-  );
+  try {
+    const installCommand = `cd ${path} && npm init -y && npm install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise husky ${testingNpm} --save-dev`;
+    await execSync(installCommand, { stdio: 'ignore' });
+  } catch(err) {
+    console.log(err);
+  }
 
   console.log(colors.green(`Packages installed successfully.`));
 
@@ -45,8 +49,9 @@ const npmInstall = async (path, testingPackage) => {
   packageContent.scripts = {
     "start": "node index.js",
     "test": testScript,
-    "lint": "eslint ./",
-    "precommit": "npm run lint && npm test"
+    "lint": "eslint ./ --fix",
+    "precommit": "npm run lint && npm test",
+    "prepare": "husky install"
   };
   packageContent.eslintConfig = eslintConfig;
 
@@ -59,6 +64,17 @@ const npmInstall = async (path, testingPackage) => {
   );
 
   console.log(colors.green(`package.json updated.`));
+
+  console.log(colors.yellow(`\nInitialising Git and Husky...`));
+
+  try {
+    const huskyCommand = `cd ${path} && git init && npm run prepare && npx husky add .husky/pre-commit "npm test && npm run lint"`;
+    await execSync(huskyCommand, { stdio: 'ignore' });
+  } catch (err) {
+    console.log(err);
+  }
+
+  console.log(colors.green(`Git and Husky initialised.`));
   return;
 }
 

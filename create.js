@@ -51,7 +51,7 @@ const create = async () => {
         }}
       );
 
-      console.log(colors.cyan(`\nYour project ${path} is ready! Happy coding!\n`));
+      console.log(colors.cyan(`Your new Node project /${path} is ready! Happy coding!\n`));
       return;
     });
 };
