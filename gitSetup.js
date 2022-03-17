@@ -23,11 +23,10 @@ const gitSetup = async (createGithubRepo, path) => {
   }
 
   await execSync(`cd ${path}
-  gh repo create '${path}' --confirm --private
   git branch -M main
   git add .
   git commit -m 'initial commit'
-  git push origin main`,
+  gh repo create '${path}' -s . --private --push`,
     { stdio: 'ignore' }
   );
   console.log(colors.green("Github repo created."));
